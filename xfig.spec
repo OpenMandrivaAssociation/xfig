@@ -72,7 +72,6 @@ install -m644 %{SOURCE2} $RPM_BUILD_ROOT%{_menudir}/xfig
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=XFig
 Comment=Vector Graphics Drawing Tool
 Exec=%{name}
