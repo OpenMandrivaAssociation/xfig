@@ -29,7 +29,6 @@ Patch2: 	xfig-3.2.5-readers.patch
 Patch3:		xfig.3.2.5-alpha5-gcc4.patch
 Patch4: xfig.3.2.5-alpha5-buffer-overflow.patch
 Requires:	transfig >= 3.2.5
-Buildroot:	%{_tmppath}/%{name}-root
 
 %description
 Xfig is an X Window System tool for creating basic vector graphics,
