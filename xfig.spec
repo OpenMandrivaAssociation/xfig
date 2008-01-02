@@ -85,6 +85,8 @@ EOF
 #clean zero-length file
 rm -f %{buildroot}%{_docdir}/xfig/html/images/sav1a0.tmp
 
+install Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.blue.ad Fig-color.classic.ad Fig-color.ad %buildroot%{_docdir}/%{name}
+
 # (fg) 10000918 Icons
 mkdir -p $RPM_BUILD_ROOT/%{_iconsdir}/{mini,large}
 install -m644 %{SOURCE1} $RPM_BUILD_ROOT/%{_iconsdir}
@@ -111,12 +113,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/X11/app-defaults/*
-%doc Doc/FORMAT* Doc/TODO Doc/xfig-howto.* 
-%doc Fig-color.blue.ad Fig-color.classic.ad Fig-color.ad
+%docdir %{_docdir}/%{name}
+%{_docdir}/%{name}
 %{_bindir}/*
 %{_prefix}/lib/X11/xfig
 %{_mandir}/man1/xfig*
-%{_docdir}/%{name}
 %_datadir/applications/mandriva*
 %{_menudir}/xfig
 %{_iconsdir}/xfig.png
