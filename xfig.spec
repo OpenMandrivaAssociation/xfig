@@ -22,7 +22,6 @@ BuildRequires:  libxi-devel
 URL:		http://www.xfig.org/xfigdist/
 Source0:	http://www.xfig.org/xfigdist/%{name}.%version-%aversion.full.tar.bz2
 Source1:	xfig.png
-Source2:	xfig_menuentry
 Source3:	xfig-mini.png
 Source4:	xfig-large.png
 Patch2: 	xfig-3.2.5-readers.patch
@@ -66,9 +65,6 @@ cp -f Doc/xfig.man Doc/Doc/xfig.man
 make DESTDIR=$RPM_BUILD_ROOT install install.man install.libs install.doc
 
 # Menu Entry
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-install -m644 %{SOURCE2} $RPM_BUILD_ROOT%{_menudir}/xfig
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
@@ -120,7 +116,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/X11/xfig
 %{_mandir}/man1/xfig*
 %_datadir/applications/mandriva*
-%{_menudir}/xfig
 %{_iconsdir}/xfig.png
 %{_miconsdir}/xfig.png
 %{_liconsdir}/xfig.png
