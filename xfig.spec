@@ -12,7 +12,7 @@ License:	MIT
 Group:		Graphics
 # needs rman to build
 BuildRequires:	libx11-devel
-BuildRequires:	libXaw3d-devel
+BuildRequires:	Xaw3d-devel
 BuildRequires:	xpm-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
