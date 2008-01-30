@@ -1,7 +1,6 @@
 %define name     xfig
 %define version  3.2.5
-%define aversion alpha5
-%define release  %mkrel 0.11
+%define release  %mkrel 1
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
@@ -19,14 +18,13 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	imake
 BuildRequires:  libxi-devel
-URL:		http://www.xfig.org/xfigdist/
-Source0:	http://www.xfig.org/xfigdist/%{name}.%version-%aversion.full.tar.bz2
+URL:		http://www.xfig.org/
+Source0:	http://files.xfig.org/%{name}.%{version}.full.tar.bz2
 Source1:	xfig.png
 Source3:	xfig-mini.png
 Source4:	xfig-large.png
-Patch2: 	xfig-3.2.5-readers.patch
-Patch3:		xfig.3.2.5-alpha5-gcc4.patch
-Patch4: xfig.3.2.5-alpha5-buffer-overflow.patch
+Patch0: 	xfig.3.2.5-readers.patch
+Patch1:		Imakefile.3.2.5.patch
 Requires:	transfig >= 3.2.5
 Buildroot:	%{_tmppath}/%{name}-root
 
@@ -41,10 +39,9 @@ You should install xfig if you need a simple program to create vector
 graphics.
 
 %prep
-%setup -q -n xfig.%version-%aversion
-%patch2 -p1
-%patch3 -p1 -b .gcc4
-%patch4 -p1 -b .buffer-overflow
+%setup -q -n %{name}.%{version}
+%patch0 -p1
+%patch1 -p1
 
 %build
 xmkmf
@@ -78,11 +75,10 @@ StartupNotify=true
 Categories=X-MandrivaLinux-Office-Drawing;Graphics;VectorGraphics;
 EOF
 
-
 #clean zero-length file
 rm -f %{buildroot}%{_docdir}/xfig/html/images/sav1a0.tmp
 
-install Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.blue.ad Fig-color.classic.ad Fig-color.ad %buildroot%{_docdir}/%{name}
+install CHANGES README Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.blue.ad Fig-color.classic.ad Fig-color.ad %buildroot%{_docdir}/%{name}
 
 # (fg) 10000918 Icons
 mkdir -p $RPM_BUILD_ROOT/%{_iconsdir}/{mini,large}
@@ -119,5 +115,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/xfig.png
 %{_miconsdir}/xfig.png
 %{_liconsdir}/xfig.png
-
-
