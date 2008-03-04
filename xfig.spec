@@ -1,6 +1,6 @@
 %define name     xfig
 %define version  3.2.5
-%define release  %mkrel 2
+%define release  %mkrel 3
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
@@ -23,9 +23,14 @@ Source0:	http://files.xfig.org/%{name}.%{version}.full.tar.bz2
 Source1:	xfig.png
 Source3:	xfig-mini.png
 Source4:	xfig-large.png
-Patch0: 	xfig.3.2.5-readers.patch
-Patch1:		Imakefile.3.2.5.patch
+Patch0:		Imakefile.3.2.5.patch
+Patch1: 	xfig.3.2.5-readers.patch
+Patch2: 	xfig.3.2.5-resources.patch
+Patch3:		w_library.c.3.2.5.patch
+Patch4:		xfig-3.2.5-mkstemp.diff
+Patch5:		xfig-3.2.5-zoom-crash.patch
 Requires:	transfig >= 3.2.5
+Requires:	xdg-utils, aspell
 Buildroot:	%{_tmppath}/%{name}-root
 
 %description
@@ -40,19 +45,23 @@ graphics.
 
 %prep
 %setup -q -n %{name}.%{version}
-%patch0 -p1
-%patch1 -p1
+%patch0 -p1 -b .Imakefile
+%patch1 -p1 -b .readers
+%patch2 -p1 -b .resources
+%patch3 -p1 -b .w_library
+%patch4 -p1 -b .mkstemp
+%patch5 -p1 -b .zoom-crash
 
 %build
 xmkmf
-perl -p -i -e "s|CXXDEBUGFLAGS = .*|CXXDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
-perl -p -i -e "s|CDEBUGFLAGS = .*|CDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
+#perl -p -i -e "s|CXXDEBUGFLAGS = .*|CXXDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
+#perl -p -i -e "s|CDEBUGFLAGS = .*|CDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
 
 %ifarch alpha
 find -name Makefile | xargs perl -pi -e "s|-O2||g"
 %endif
 
-%make
+%make CDEBUGFLAGS="$RPM_OPT_FLAGS -fno-strength-reduce -fno-strict-aliasing"
 
 %install
 rm -rf $RPM_BUILD_ROOT
