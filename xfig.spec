@@ -1,6 +1,6 @@
 %define name     xfig
 %define version  3.2.5
-%define release  %mkrel 3
+%define release  %mkrel 4
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
@@ -12,7 +12,7 @@ License:	MIT
 Group:		Graphics
 # needs rman to build
 BuildRequires:	libx11-devel
-BuildRequires:	Xaw3d-devel
+BuildRequires:	xaw-devel
 BuildRequires:	xpm-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
