@@ -29,6 +29,7 @@ Patch2: 	xfig.3.2.5-resources.patch
 Patch3:		w_library.c.3.2.5.patch
 Patch4:		xfig-3.2.5-mkstemp.diff
 Patch5:		xfig-3.2.5-zoom-crash.patch
+Patch6:     xfig-format-string.patch
 Requires:	transfig >= 3.2.5
 Requires:	xdg-utils, aspell
 Buildroot:	%{_tmppath}/%{name}-root
@@ -51,6 +52,7 @@ graphics.
 %patch3 -p1 -b .w_library
 %patch4 -p1 -b .mkstemp
 %patch5 -p1 -b .zoom-crash
+%patch6 -p0
 
 %build
 xmkmf
