@@ -18,6 +18,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	imake
 BuildRequires:  libxi-devel
+BuildRequires:	libxp-devel
 URL:		http://www.xfig.org/
 Source0:	http://files.xfig.org/%{name}.%{version}.full.tar.bz2
 Source1:	xfig.png
