@@ -1,6 +1,6 @@
 %define name     xfig
-%define version  3.2.5
-%define release  %mkrel 6
+%define version  3.2.5b
+%define release  %mkrel 1
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
@@ -20,18 +20,15 @@ BuildRequires:	imake
 BuildRequires:  libxi-devel
 BuildRequires:	libxp-devel
 URL:		http://www.xfig.org/
-Source0:	http://files.xfig.org/%{name}.%{version}.full.tar.bz2
+Source0:	http://files.xfig.org/%{name}.%{version}.full.tar.gz
 Source1:	xfig.png
 Source3:	xfig-mini.png
 Source4:	xfig-large.png
-Patch0:		Imakefile.3.2.5.patch
-Patch1: 	xfig.3.2.5-readers.patch
-Patch2: 	xfig.3.2.5-resources.patch
-Patch3:		w_library.c.3.2.5.patch
-Patch4:		xfig-3.2.5-mkstemp.diff
-Patch5:		xfig-3.2.5-zoom-crash.patch
-Patch6:     xfig-format-string.patch
-Requires:	transfig >= 3.2.5
+Patch0:		Imakefile.3.2.5b.patch
+Patch1: 	xfig.3.2.5b-readers.patch
+Patch2: 	xfig.3.2.5b-resources.patch
+Patch3:		xfig-format-string.patch
+Requires:	transfig >= 3.2.5a
 Requires:	xdg-utils, aspell
 Buildroot:	%{_tmppath}/%{name}-root
 
@@ -50,12 +47,11 @@ graphics.
 %patch0 -p1 -b .Imakefile
 %patch1 -p1 -b .readers
 %patch2 -p1 -b .resources
-%patch3 -p1 -b .w_library
-%patch4 -p1 -b .mkstemp
-%patch5 -p1 -b .zoom-crash
-%patch6 -p0
+%patch3 -p0
 
 %build
+chmod 700 Libraries
+
 xmkmf
 #perl -p -i -e "s|CXXDEBUGFLAGS = .*|CXXDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
 #perl -p -i -e "s|CDEBUGFLAGS = .*|CDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
@@ -90,7 +86,7 @@ EOF
 #clean zero-length file
 rm -f %{buildroot}%{_docdir}/xfig/html/images/sav1a0.tmp
 
-install CHANGES README Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.blue.ad Fig-color.classic.ad Fig-color.ad %buildroot%{_docdir}/%{name}
+install CHANGES README Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.ad %buildroot%{_docdir}/%{name}
 
 # (fg) 10000918 Icons
 mkdir -p $RPM_BUILD_ROOT/%{_iconsdir}/{mini,large}
