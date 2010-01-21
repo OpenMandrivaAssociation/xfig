@@ -1,6 +1,6 @@
 %define name     xfig
 %define version  3.2.5b
-%define release  %mkrel 2
+%define release  %mkrel 3
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
@@ -50,7 +50,7 @@ graphics.
 %patch3 -p0
 
 %build
-chmod 700 Libraries
+find Libraries -type d -exec chmod 700 {} \;
 
 xmkmf
 #perl -p -i -e "s|CXXDEBUGFLAGS = .*|CXXDEBUGFLAGS = $RPM_OPT_FLAGS|" Makefile
@@ -63,15 +63,22 @@ find -name Makefile | xargs perl -pi -e "s|-O2||g"
 %make CDEBUGFLAGS="$RPM_OPT_FLAGS -fno-strength-reduce -fno-strict-aliasing"
 
 %install
-rm -rf $RPM_BUILD_ROOT
-# Hack around an ugly problem for now. --Geoff
-mkdir -p Doc/Doc
-cp -f Doc/xfig.man Doc/Doc/xfig.man
-make DESTDIR=$RPM_BUILD_ROOT install install.man install.libs install.doc
+%__rm -rf %{buildroot}
 
-# Menu Entry
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+# Hack around an ugly problem for now. --Geoff
+%__mkdir -p Doc/Doc
+%__cp -f Doc/xfig.man Doc/Doc/xfig.man
+%__make DESTDIR=%{buildroot} install install.man install.libs install.doc
+
+# Fix for #42629:
+find %{buildroot}/usr/lib/X11/xfig/Libraries -type d -exec chmod 755 {} \;
+find %{buildroot}/usr/lib/X11/xfig/Libraries -type f -exec chmod 644 {} \;
+find %{buildroot}%{_docdir}/xfig/html -type d -exec chmod 755 {} \;
+find %{buildroot}%{_docdir}/xfig/html -type f -exec chmod 644 {} \;
+
+# Menu Entry:
+%__install -m 755 -d %{buildroot}%{_datadir}/applications
+%__cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=XFig
 Comment=Vector Graphics Drawing Tool
@@ -82,24 +89,26 @@ Type=Application
 StartupNotify=true
 Categories=X-MandrivaLinux-Office-Drawing;Graphics;VectorGraphics;
 EOF
+chmod 644 %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop
 
-#clean zero-length file
-rm -f %{buildroot}%{_docdir}/xfig/html/images/sav1a0.tmp
+# Discard zero-length file:
+%__rm -f %{buildroot}%{_docdir}/xfig/html/images/sav1a0.tmp
 
-install CHANGES README Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.ad %buildroot%{_docdir}/%{name}
+%__install -m 644 CHANGES README Doc/FORMAT* Doc/TODO Doc/xfig-howto.* Fig-color.ad %{buildroot}%{_docdir}/%{name}
 
 # (fg) 10000918 Icons
-mkdir -p $RPM_BUILD_ROOT/%{_iconsdir}/{mini,large}
-install -m644 %{SOURCE1} $RPM_BUILD_ROOT/%{_iconsdir}
-install -m644 %{SOURCE3} $RPM_BUILD_ROOT/%{_miconsdir}/xfig.png
-install -m644 %{SOURCE4} $RPM_BUILD_ROOT/%{_liconsdir}/xfig.png
-rm -f %buildroot%_prefix/lib/X11/app-defaults
-#gw alternative colour scheme
-install -m644 Fig-color.bisque.ad %buildroot%{_sysconfdir}/X11/app-defaults/Fig-color
+%__install -m 755 -d %{buildroot}%{_iconsdir}/{mini,large}
+%__install -m 644 %{SOURCE1} %{buildroot}%{_iconsdir}
+%__install -m 644 %{SOURCE3} %{buildroot}%{_miconsdir}/xfig.png
+%__install -m 644 %{SOURCE4} %{buildroot}%{_liconsdir}/xfig.png
+%__rm -f %buildroot%_prefix/lib/X11/app-defaults
+
+# Install alternative colour scheme:
+%__install -m644 Fig-color.bisque.ad %{buildroot}%{_sysconfdir}/X11/app-defaults/Fig-color
 
 %if %mdkver <= 200700
-mkdir -p %buildroot/%_mandir
-mv %buildroot%_prefix/man/* %buildroot/%_mandir
+%__mkdir -p %buildroot/%_mandir
+%__mv -f %buildroot%_prefix/man/* %buildroot/%_mandir
 %endif
 
 %if %mdkversion < 200900
@@ -113,7 +122,7 @@ mv %buildroot%_prefix/man/* %buildroot/%_mandir
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%__rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
