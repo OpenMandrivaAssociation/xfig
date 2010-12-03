@@ -1,6 +1,6 @@
 %define name     xfig
 %define version  3.2.5b
-%define release  %mkrel 3
+%define release  %mkrel 4
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
