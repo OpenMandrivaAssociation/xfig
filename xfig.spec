@@ -1,6 +1,6 @@
 %define name     xfig
 %define version  3.2.5b
-%define release  %mkrel 4
+%define release  %mkrel 5
 %define epoch    1
 
 Summary:	An X Window System tool for drawing basic vector graphics
@@ -28,6 +28,8 @@ Patch0:		Imakefile.3.2.5b.patch
 Patch1: 	xfig.3.2.5b-readers.patch
 Patch2: 	xfig.3.2.5b-resources.patch
 Patch3:		xfig-format-string.patch
+Patch4:		xfig.3.2.5b-CVE-2009-4227,4228.diff
+Patch5:		xfig.3.2.5b-CVE-2010-4262.diff
 Requires:	transfig >= 3.2.5a
 Requires:	xdg-utils, aspell
 Buildroot:	%{_tmppath}/%{name}-root
@@ -44,10 +46,15 @@ graphics.
 
 %prep
 %setup -q -n %{name}.%{version}
+# fix perms
+find -type d | xargs chmod 755
+
 %patch0 -p1 -b .Imakefile
 %patch1 -p1 -b .readers
 %patch2 -p1 -b .resources
 %patch3 -p0
+%patch4 -p0 -b .CVE-2009-4227,4228
+%patch5 -p0 -b .CVE-2010-4262
 
 %build
 find Libraries -type d -exec chmod 700 {} \;
