@@ -1,0 +1,13 @@
+Index: w_msgpanel.c
+===================================================================
+--- w_msgpanel.c
++++ w_msgpanel.c	2009-03-07 12:26:45.000000000 +0100
+@@ -588,7 +588,7 @@
+ 
+     strcat(tmpstr,"\n");
+     if (update_figs) {
+-	fprintf(stderr,tmpstr);
++	fprintf(stderr, "%s", tmpstr);
+     } else {
+ 	/* append this message to the file message widget string */
+ 	block.firstPos = 0;
