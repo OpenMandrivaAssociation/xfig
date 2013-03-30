@@ -13,7 +13,6 @@ BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	imake
 BuildRequires:	pkgconfig(xi)
-BuildRequires:	pkgconfig(xp)
 URL:		http://www.xfig.org/
 Source0:	http://files.xfig.org/%{name}.%{version}.full.tar.gz
 Source1:	xfig.png
