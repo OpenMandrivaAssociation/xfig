@@ -7,6 +7,7 @@ License:	MIT
 Group:		Graphics
 # needs rman to build
 BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(xaw7)
 BuildRequires:	pkgconfig(xaw3d)
 BuildRequires:	pkgconfig(xpm)
 BuildRequires:	jpeg-devel
