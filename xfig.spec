@@ -7,7 +7,7 @@ License:	MIT
 Group:		Graphics
 # needs rman to build
 BuildRequires:	pkgconfig(x11)
-BuildRequires:	pkgconfig(xaw7)
+BuildRequires:	pkgconfig(xaw3d)
 BuildRequires:	pkgconfig(xpm)
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
@@ -18,8 +18,9 @@ Source1:	xfig.png
 Source3:	xfig-mini.png
 Source4:	xfig-large.png
 Patch2:		xfig.3.2.5b-resources.patch
-Requires:	transfig >= 3.2.5a
-Requires:	xdg-utils, aspell
+Requires:	xdg-utils
+Requires:	aspell
+%rename transfig
 
 %description
 Xfig is an X Window System tool for creating basic vector graphics,
@@ -40,7 +41,7 @@ find Libraries -type d -exec chmod 700 {} \;
 %configure
 
 cd ../fig2dev-%{version}
-%configure
+%configure --enable-transfig --enable-pic2t2e
 
 %build
 %make_build
@@ -59,6 +60,7 @@ cd ../fig2dev-%{version}
 %{_bindir}/fig2dev
 %{_bindir}/fig2ps2tex
 %{_bindir}/pic2tpic
+%{_bindir}/transfig
 %{_datadir}/X11/app-defaults/Fig
 %{_datadir}/applications/xfig.desktop
 %{_datadir}/fig2dev
