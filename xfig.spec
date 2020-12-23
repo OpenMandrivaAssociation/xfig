@@ -13,6 +13,7 @@ BuildRequires:	pkgconfig(xpm)
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(xi)
+BuildRequires:	transfig netpbm imagemagick
 URL:		http://www.xfig.org/
 Source0:	https://kumisystems.dl.sourceforge.net/project/mcj/xfig%2Bfig2dev-%{version}.tar.xz
 Source1:	xfig.png
