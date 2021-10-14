@@ -1,7 +1,7 @@
 Summary:	An X Window System tool for drawing basic vector graphics
 Name:		xfig
 Version:	3.2.8a
-Release:	1
+Release:	2
 License:	MIT
 Group:		Graphics
 # needs rman to build
@@ -13,6 +13,8 @@ BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	transfig netpbm imagemagick ghostscript
+BuildRequires:  htmldoc
+
 URL:		http://www.xfig.org/
 Source0:	https://kumisystems.dl.sourceforge.net/project/mcj/xfig%2Bfig2dev-%{version}.tar.xz
 Source1:	xfig.png
