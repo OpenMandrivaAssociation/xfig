@@ -9,6 +9,7 @@ BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xaw7)
 BuildRequires:	pkgconfig(xaw3d)
 BuildRequires:	pkgconfig(xpm)
+BuildRequires:	pkgconfig(xft)
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(xi)
