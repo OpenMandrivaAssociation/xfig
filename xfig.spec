@@ -1,6 +1,6 @@
 Summary:	An X Window System tool for drawing basic vector graphics
 Name:		xfig
-Version:	3.2.8b
+Version:	3.2.9
 Release:	1
 License:	MIT
 Group:		Graphics
