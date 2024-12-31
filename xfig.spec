@@ -1,6 +1,6 @@
 Summary:	An X Window System tool for drawing basic vector graphics
 Name:		xfig
-Version:	3.2.9
+Version:	3.2.9a
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -66,7 +66,8 @@ cd ../fig2dev-%{version}
 %{_bindir}/pic2tpic
 %{_bindir}/transfig
 %{_datadir}/X11/app-defaults/Fig
-%{_datadir}/applications/xfig.desktop
+%{_datadir}/applications/org.xfig.xfig.desktop
+%{_datadir}/metainfo/org.xfig.xfig.metainfo.xml
 %{_datadir}/fig2dev
 %{_datadir}/xfig
 %{_datadir}/pixmaps/xfig.png
