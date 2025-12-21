@@ -5,6 +5,11 @@ Release:	1
 License:	MIT
 Group:		Graphics
 # needs rman to build
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xaw7)
 BuildRequires:	pkgconfig(xaw3d)
